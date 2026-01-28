@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KinRaiDee Fridge Inventory</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#22b477",
+                        "primary-dark": "#1a9461",
+                        "background-light": "#f7f8f8",
+                        "background-dark": "#21242c",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2a2e37",
+                        "danger": "#ef4444",
+                        "warning": "#f59e0b",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "soft": "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
+                        "glow": "0 0 15px rgba(34, 180, 119, 0.3)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 px-6 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">kitchen</span>
+</div>
+<a href="./index.html"><h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">KinRaiDee</h2></a>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-semibold transition-colors text-sm" href="./index.html">Home</a>
+<a class="text-primary font-bold text-sm bg-primary/10 px-4 py-2 rounded-full" href="./myfridge.html">Fridge</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-semibold transition-colors text-sm" href="./tumRaidee.html">Recipes</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary font-semibold transition-colors text-sm" href="#">Profile</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-danger rounded-full ring-2 ring-white dark:ring-surface-dark"></span>
+</button>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-slate-100 dark:border-slate-700" data-alt="Portrait of a young woman with curly hair looking friendly" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIfSfF_22Xl6xo0foCn4E7HEA0yxcvSAwCGDXL9f2idUTkKyNIJTfOKxkEWmu-PGyHHgum8_3H9H6yLnNxiL1JzKuGp2MYdNL-S3W27w3TBS2vNlkyH4EU-MVOImkgb735txbL5_e3FD9y81DgFboLcsb6Iknrj4wn84cTWaCpmG2zdKpvY8hQ4obU5eeiw7gMqHUDmwxQNGpjOW1NEcHAB2IUrLvdZnq7GBnvq8GGjifWTPOs7Zkz2FPj-dFdzILnpBjZlMbgxXsI');"></div>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 md:px-6 py-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Main Inventory (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">My Fridge</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Manage your household ingredients</p>
+</div>
+<button class="group flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold h-12 px-6 rounded-xl transition-all shadow-glow hover:shadow-lg hover:-translate-y-0.5">
+<span class="material-symbols-outlined">add_circle</span>
+<span>Add Item</span>
+</button>
+</div>
+<!-- Search & Filters -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-4 shadow-soft flex flex-col md:flex-row gap-4">
+<div class="flex-1 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full h-12 pl-12 pr-4 bg-slate-50 dark:bg-slate-800/50 border-none rounded-xl text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary/50 text-base" placeholder="Search ingredients (e.g. Eggs, Milk)..." type="text"/>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+<button class="h-12 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-xl flex items-center gap-2 text-sm font-semibold whitespace-nowrap transition-colors text-slate-700 dark:text-slate-200">
+<span class="material-symbols-outlined text-[20px]">sort</span>
+<span>Sort: Expiry</span>
+</button>
+<button class="h-12 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-xl flex items-center gap-2 text-sm font-semibold whitespace-nowrap transition-colors text-slate-700 dark:text-slate-200">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span>Filter</span>
+</button>
+</div>
+</div>
+<!-- Categories -->
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+<button class="flex h-10 px-5 shrink-0 items-center justify-center rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold shadow-md">
+                        All Items
+                    </button>
+<button class="flex h-10 px-5 shrink-0 items-center justify-center rounded-full bg-white dark:bg-surface-dark border border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-colors text-sm font-semibold">
+                        🥕 Vegetables
+                    </button>
+<button class="flex h-10 px-5 shrink-0 items-center justify-center rounded-full bg-white dark:bg-surface-dark border border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-colors text-sm font-semibold">
+                        🥩 Meat
+                    </button>
+<button class="flex h-10 px-5 shrink-0 items-center justify-center rounded-full bg-white dark:bg-surface-dark border border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-colors text-sm font-semibold">
+                        🥛 Dairy
+                    </button>
+<button class="flex h-10 px-5 shrink-0 items-center justify-center rounded-full bg-white dark:bg-surface-dark border border-slate-100 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary hover:text-primary transition-colors text-sm font-semibold">
+                        🥫 Pantry
+                    </button>
+</div>
+<!-- Inventory Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+<!-- Item 1: Fresh -->
+<div class="group relative bg-surface-light dark:bg-surface-dark p-4 rounded-2xl shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-primary/20">
+<div class="absolute top-4 right-4 text-slate-300 hover:text-slate-500 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</div>
+<div class="h-20 w-full flex items-center justify-center text-5xl mb-2">
+                            🥬
+                        </div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white truncate">Romaine Lettuce</h3>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">scale</span>
+<span>2 heads</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2.5 py-1 rounded-md text-xs font-bold">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                6 days left
+                            </div>
+</div>
+</div>
+<!-- Item 2: Expiring Soon -->
+<div class="group relative bg-surface-light dark:bg-surface-dark p-4 rounded-2xl shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-warning/30 ring-1 ring-warning/20">
+<div class="absolute top-4 right-4 text-slate-300 hover:text-slate-500 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</div>
+<div class="h-20 w-full flex items-center justify-center text-5xl mb-2">
+                            🥛
+                        </div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white truncate">Whole Milk</h3>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">water_drop</span>
+<span>500 ml</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1.5 bg-warning/20 text-warning px-2.5 py-1 rounded-md text-xs font-bold">
+<span class="size-1.5 rounded-full bg-warning animate-pulse"></span>
+                                Exp. Tomorrow
+                            </div>
+</div>
+</div>
+<!-- Item 3: Fresh -->
+<div class="group relative bg-surface-light dark:bg-surface-dark p-4 rounded-2xl shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-primary/20">
+<div class="absolute top-4 right-4 text-slate-300 hover:text-slate-500 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</div>
+<div class="h-20 w-full flex items-center justify-center text-5xl mb-2">
+                            🥚
+                        </div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white truncate">Free Range Eggs</h3>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">egg</span>
+<span>8 pcs</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2.5 py-1 rounded-md text-xs font-bold">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                12 days left
+                            </div>
+</div>
+</div>
+<!-- Item 4: Fresh -->
+<div class="group relative bg-surface-light dark:bg-surface-dark p-4 rounded-2xl shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-primary/20">
+<div class="absolute top-4 right-4 text-slate-300 hover:text-slate-500 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</div>
+<div class="h-20 w-full flex items-center justify-center text-5xl mb-2">
+                            🥑
+                        </div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white truncate">Avocados</h3>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">shopping_bag</span>
+<span>3 pcs</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2.5 py-1 rounded-md text-xs font-bold">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                4 days left
+                            </div>
+</div>
+</div>
+<!-- Item 5: Expired -->
+<div class="group relative bg-surface-light dark:bg-surface-dark p-4 rounded-2xl shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-danger/30 ring-1 ring-danger/10 opacity-80 hover:opacity-100">
+<div class="absolute top-4 right-4 text-slate-300 hover:text-slate-500 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</div>
+<div class="h-20 w-full flex items-center justify-center text-5xl mb-2 grayscale">
+                            🍅
+                        </div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white truncate">Tomatoes</h3>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">shopping_bag</span>
+<span>4 pcs</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1.5 bg-danger/10 text-danger px-2.5 py-1 rounded-md text-xs font-bold">
+<span class="material-symbols-outlined text-[14px]">error</span>
+                                Expired
+                            </div>
+</div>
+</div>
+<!-- Item 6: Fresh -->
+<div class="group relative bg-surface-light dark:bg-surface-dark p-4 rounded-2xl shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-transparent hover:border-primary/20">
+<div class="absolute top-4 right-4 text-slate-300 hover:text-slate-500 cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</div>
+<div class="h-20 w-full flex items-center justify-center text-5xl mb-2">
+                            🥩
+                        </div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white truncate">Ribeye Steak</h3>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm mb-3">
+<span class="material-symbols-outlined text-[16px]">scale</span>
+<span>400g</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2.5 py-1 rounded-md text-xs font-bold">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                3 days left
+                            </div>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="flex justify-center mt-4">
+<button class="text-slate-500 hover:text-primary font-semibold text-sm flex items-center gap-2 transition-colors">
+<span>Load more ingredients</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Sidebar Widgets (4 cols) -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<!-- Widget: Use It Up! -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl p-6 shadow-soft border border-warning/20 relative overflow-hidden">
+<!-- Background decoration -->
+<div class="absolute -right-6 -top-6 size-24 bg-warning/10 rounded-full blur-2xl"></div>
+<div class="flex items-center gap-2 mb-4 relative z-10">
+<div class="bg-warning/20 text-warning p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px]">priority_high</span>
+</div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white">Use it up!</h3>
+</div>
+<p class="text-sm text-slate-500 mb-4 relative z-10">These items are expiring within 48 hours.</p>
+<div class="flex flex-col gap-3 relative z-10">
+<div class="flex items-center gap-3 p-3 bg-background-light dark:bg-background-dark rounded-xl">
+<div class="text-2xl">🥛</div>
+<div class="flex-1">
+<div class="font-bold text-slate-900 dark:text-white text-sm">Whole Milk</div>
+<div class="text-xs text-warning font-semibold">Expires Tomorrow</div>
+</div>
+<button class="size-8 rounded-full bg-white dark:bg-slate-700 shadow-sm flex items-center justify-center text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined text-[18px]">restaurant_menu</span>
+</button>
+</div>
+<div class="flex items-center gap-3 p-3 bg-background-light dark:bg-background-dark rounded-xl opacity-60">
+<div class="text-2xl">🍅</div>
+<div class="flex-1">
+<div class="font-bold text-slate-900 dark:text-white text-sm">Tomatoes</div>
+<div class="text-xs text-danger font-semibold">Expired Today</div>
+</div>
+<button class="size-8 rounded-full bg-white dark:bg-slate-700 shadow-sm flex items-center justify-center text-slate-400 hover:text-danger">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Widget: Quick Stats -->
+<div class="bg-primary text-white rounded-2xl p-6 shadow-glow relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-10 -mt-10 blur-3xl"></div>
+<h3 class="font-bold text-lg mb-6 relative z-10">Fridge Health</h3>
+<div class="flex justify-between items-end relative z-10">
+<div>
+<div class="text-4xl font-black mb-1">85%</div>
+<div class="text-primary-100 text-sm font-medium">Freshness Score</div>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold mb-1">24</div>
+<div class="text-primary-100 text-sm font-medium">Total Items</div>
+</div>
+</div>
+<!-- Simple Progress Bar -->
+<div class="w-full bg-black/20 h-2 rounded-full mt-6 overflow-hidden relative z-10">
+<div class="bg-white h-full rounded-full w-[85%]"></div>
+</div>
+</div>
+<!-- Widget: Recipe Suggestion -->
+<div class="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-soft overflow-hidden group cursor-pointer">
+<div class="h-40 w-full bg-cover bg-center relative" data-alt="Top down view of a delicious looking omelette with greens" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCl8Tm9M_Y85vwaCgiyxm2z0cG0mu9tDmhLAf8WPDzPywAgj1_v_GXrfyLug8We_dkHQZnmTHv_Dww2Ykom3kTLs1q7N6u6gC4k9LNV7X3NaIPPtArIWllph0I7kF1hNHz5_l4_OcK2QWQ6nveE41LgLeiLemlj6ichyis1itG0ZnINUmKtVsuTUZUkkxsS6j-BjwqryNRrQkLw50YEmnH7cRk_aWYmpnlxUmRFDXaw6dmCiL8jU5h8S51r3NIT1CDzGs2ezlpGLMz7');">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white">
+<div class="bg-primary text-xs font-bold px-2 py-1 rounded mb-1 inline-block">Use your 3 Eggs</div>
+<h3 class="font-bold text-lg leading-tight">Morning Herb Omelet</h3>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div class="text-sm text-slate-500 dark:text-slate-400">
+<span class="font-bold text-slate-900 dark:text-white">15</span> mins • Easy
+                         </div>
+<div class="size-8 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

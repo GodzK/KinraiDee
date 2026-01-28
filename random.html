@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KinRaiDee - Randomizer</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#22b477",
+                        "primary-hover": "#1e9e68",
+                        "background-light": "#f7f8f8",
+                        "background-dark": "#21242c",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#2c303b",
+                        "text-main": "#121715",
+                        "text-muted": "#658678",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for horizontal scrolling */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col transition-colors duration-300">
+<!-- Top Navigation -->
+<nav class="sticky top-0 z-50 w-full border-b border-[#f0f4f3] dark:border-gray-800 bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-md">
+<div class="px-6 md:px-10 py-3 max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-4 text-text-main dark:text-white">
+<div class="size-8 text-primary flex items-center justify-center bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-2xl">restaurant_menu</span>
+</div>
+<a href="./index.html"><h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">KinRaiDee</h2></a>
+</div>
+<div class="flex items-center gap-4 md:gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-text-main dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="./index.html">Home</a>
+<a class="text-text-main dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="./myfridge.html">Fridge</a>
+<a class="text-text-main dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">Profile</a>
+</div>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-gray-700 shadow-sm" data-alt="User profile avatar showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDlguZiiLhOAmo_-vuEwtBqOrsgSb5I-5eD7Hs7DyViZypbcWa9kRbrOBfqpxDAwGrLLwu7-O38onCldGIxN0AnJjJiIx60ahIS3e_OFcZPagDSfAUQY1KVxSR8qu2g2ZHT9dPZGagdZm_xbPBq35a3zNnSOt4t4WbnsUPO7dTfFzbRQWK5QOtHiF2TXR4xxTNSimPeHxTSIT5iFg6rIp3XviSwEqIEp2K43Mx1oEhrIaG1VWeUT_qZiLKDEjI0El_tMKZM2v-sWfZ9");'></div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-6 py-8 md:py-12 flex flex-col gap-12">
+<!-- Hero Section Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+<!-- Left Column: Controls & Decisions -->
+<div class="lg:col-span-5 flex flex-col gap-8 order-2 lg:order-1">
+<!-- Heading -->
+<div class="flex flex-col gap-3">
+<div class="inline-flex w-fit items-center gap-2 rounded-full bg-orange-100 dark:bg-orange-900/30 px-3 py-1 text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined text-sm font-bold">bolt</span>
+<span class="text-xs font-bold uppercase tracking-wide">AI Powered</span>
+</div>
+<h1 class="text-text-main dark:text-white text-4xl md:text-5xl font-black leading-[1.1] tracking-[-0.033em]">
+                        Can't decide?<br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-emerald-400">Let us pick.</span>
+</h1>
+<p class="text-text-muted dark:text-gray-400 text-lg">Spin the wheel to find your next meal. We'll make sure it's delicious.</p>
+</div>
+<!-- Filters Bento -->
+<div class="flex flex-col gap-4">
+<label class="text-text-main dark:text-gray-200 text-sm font-bold uppercase tracking-wider">Quick Filters</label>
+<div class="flex flex-wrap gap-2">
+<button class="group flex h-10 items-center justify-center gap-x-2 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 pl-4 pr-4 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg text-gray-400 group-hover:text-primary transition-colors">payments</span>
+<p class="text-text-main dark:text-gray-200 text-sm font-medium group-hover:text-primary">Under 100 THB</p>
+</button>
+<button class="group flex h-10 items-center justify-center gap-x-2 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 pl-4 pr-4 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg text-gray-400 group-hover:text-primary transition-colors">eco</span>
+<p class="text-text-main dark:text-gray-200 text-sm font-medium group-hover:text-primary">Vegetarian</p>
+</button>
+<button class="group flex h-10 items-center justify-center gap-x-2 rounded-xl bg-primary/10 border border-primary pl-4 pr-4 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg text-primary">ramen_dining</span>
+<p class="text-primary text-sm font-bold">Noodles</p>
+</button>
+<button class="group flex h-10 items-center justify-center gap-x-2 rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 pl-4 pr-4 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-lg text-gray-400 group-hover:text-primary transition-colors">local_fire_department</span>
+<p class="text-text-main dark:text-gray-200 text-sm font-medium group-hover:text-primary">Spicy</p>
+</button>
+</div>
+</div>
+<!-- Action Panel: Toggle -->
+<div class="rounded-2xl border border-gray-200 dark:border-gray-700 bg-surface-light dark:bg-surface-dark p-5 shadow-sm">
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined">near_me</span>
+</div>
+<div class="flex flex-col">
+<p class="text-text-main dark:text-white text-base font-bold leading-tight">Nearby Only</p>
+<p class="text-text-muted dark:text-gray-400 text-sm">Find spots within 1km walking distance</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-gray-200 dark:bg-gray-700 p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary transition-colors">
+<div class="h-[27px] w-[27px] rounded-full bg-white shadow-md transition-all"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- Main CTA Button -->
+<button class="group relative flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl h-16 bg-primary hover:bg-primary-hover text-white shadow-lg shadow-primary/30 transition-all hover:scale-[1.02] active:scale-[0.98]">
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+<div class="relative flex items-center gap-3">
+<span class="material-symbols-outlined text-3xl animate-bounce">casino</span>
+<span class="text-xl font-bold tracking-wide">Kin Rai Dee? (Surprise Me!)</span>
+</div>
+</button>
+</div>
+<!-- Right Column: Result Card -->
+<div class="lg:col-span-7 w-full order-1 lg:order-2">
+<div class="relative group perspective-1000">
+<!-- Decor Background Elements -->
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-[2.5rem] blur opacity-20 dark:opacity-30 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+<!-- Card Container -->
+<div class="relative flex flex-col md:flex-row rounded-2xl bg-surface-light dark:bg-surface-dark shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-800">
+<!-- Image Half -->
+<div class="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
+<div class="absolute top-4 left-4 z-10">
+<div class="bg-white/90 dark:bg-black/80 backdrop-blur-sm text-text-main dark:text-white px-3 py-1 rounded-lg text-xs font-bold shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-yellow-500 text-sm">star</span>
+                                    4.8 Match
+                                </div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 md:hidden"></div>
+<img alt="Pad Kra Pao" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close up of Pad Kra Pao, Thai spicy basil stir fry with fried egg on top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWlv31ZT7sVE6R9lNQNyL5zR7di79M6udqusWpFkZOKG9m02olMP-ngZdb58NbNWciyBM3kMrjOjYlUh0ffjgNzjo-fMIbbAVhyJob60msr9E2dXoHT2lxXK_DNhNb-YYpx8Hq8eegppUE5YfyawYjnrOzLeDrr7NGmiI1r0mbRslfppAleAe76FlXMkXJdQorzQb1Dc7--8LbRCBPbFN4Nev9fJHBUi_zZWkfWSsI5ySlB0OqFgZRzlM0w7jHGG0L9B64Sxa-md3h"/>
+</div>
+<!-- Content Half -->
+<div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-between gap-6">
+<div>
+<div class="flex items-start justify-between mb-2">
+<span class="text-primary font-bold text-sm tracking-widest uppercase">Result</span>
+<button class="text-gray-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<h3 class="text-3xl font-black text-text-main dark:text-white leading-tight mb-2">
+                                    Pad Kra Pao
+                                </h3>
+<p class="text-text-muted dark:text-gray-400 text-sm leading-relaxed line-clamp-3">
+                                    The ultimate Thai comfort food. Spicy stir-fried holy basil with minced pork, garlic, and chili, topped with a crispy fried egg over jasmine rice.
+                                </p>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-3 gap-2 border-y border-gray-100 dark:border-gray-700 py-4">
+<div class="flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-orange-500 mb-1">local_fire_department</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">450 kcal</span>
+</div>
+<div class="flex flex-col items-center justify-center text-center border-l border-r border-gray-100 dark:border-gray-700">
+<span class="material-symbols-outlined text-green-600 mb-1">attach_money</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">45-60 THB</span>
+</div>
+<div class="flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-blue-500 mb-1">directions_walk</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">5 min</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3">
+<button class="w-full h-12 flex items-center justify-center gap-2 bg-text-main dark:bg-white text-white dark:text-text-main rounded-xl font-bold hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">map</span>
+                                    Find Nearby
+                                </button>
+<button class="w-full h-12 flex items-center justify-center gap-2 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-text-main dark:text-white rounded-xl font-medium transition-colors">
+<span class="material-symbols-outlined">menu_book</span>
+                                    See Recipe
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- History / Recently Viewed -->
+<div class="flex flex-col gap-6 mt-4">
+<div class="flex items-center justify-between px-1">
+<h4 class="text-text-main dark:text-white text-xl font-bold">Recently Suggested</h4>
+<button class="text-sm font-medium text-primary hover:text-primary-hover">Clear History</button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- History Item 1 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 cursor-pointer hover:shadow-lg transition-all">
+<div class="aspect-[4/3] bg-gray-100 dark:bg-gray-800 relative">
+<img alt="Chicken Rice" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Plate of Hainanese chicken rice with cucumber" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOF3qTndklW6HAU7vqNoWEOAC5ds4KuN6lvBPT_cEzd611U7m07sfU0-FVyuevCWT0_gSUccMA1548gBH5zEQcPdnq9ZdS6RbO17MLMG--0TyF3CZOUX9xrI6e3kj4IyVac279RpPBzUpRDnx8TESGlixPP-O8EC9V0y2mQIeFdqc-SnRKvoFMITig8sGvn38w-14mWLCDQ_3T35wFlPufFSUxO-8ahz1IO9deRK4sd383DepaOY7seKgEfYDVSOEUkxmo3MPS_bYj"/>
+<div class="absolute bottom-2 right-2 bg-white/90 dark:bg-black/80 px-2 py-1 rounded text-xs font-bold text-text-main dark:text-white shadow-sm">
+                            Yesterday
+                        </div>
+</div>
+<div class="p-3">
+<p class="font-bold text-text-main dark:text-white truncate">Khao Man Gai</p>
+<p class="text-xs text-text-muted dark:text-gray-400">Chicken Rice</p>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 cursor-pointer hover:shadow-lg transition-all">
+<div class="aspect-[4/3] bg-gray-100 dark:bg-gray-800 relative">
+<img alt="Boat Noodles" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Bowl of spicy noodles with chopsticks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIvgzTlMPOu788FsYxxbxaVWcm8_depK_kHbxnLc9f0q5HL6u3ULm0hut0JiWuH3z3FGGW0JAxLJ13A9so3ALOOSa7hEWUbueKdojJ7yXFBlK4uZE5JROlBA5pkC6Tj8GJ-gJ0cYKQkfff7wvwVvgAJjcEDSnDuc7QoQ_8V3vNKLb1KiGqKxMFsQGQhby5fVfXUaKkA5IDV92fmyiKuG59kcNOJgap2hHyWNaXcrDBEupwAjyJL1fznE1wYSqzjEmxXnIqlP86VGZf"/>
+</div>
+<div class="p-3">
+<p class="font-bold text-text-main dark:text-white truncate">Kuay Teow Ruea</p>
+<p class="text-xs text-text-muted dark:text-gray-400">Boat Noodles</p>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="group relative overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark border border-gray-100 dark:border-gray-800 cursor-pointer hover:shadow-lg transition-all">
+<div class="aspect-[4/3] bg-gray-100 dark:bg-gray-800 relative">
+<img alt="Som Tum" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Spicy papaya salad Som Tum on a plate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJiYt_e01N3OTxuR0rL0uXvL75B4jI2AslTfsJS4dXB7mGIGjkZyTkyx8qU9aUS55hDVr06-Ax93F6qtgWxcA1aS1SFj6kNohdPi8y-AjgMDbAI3339NkKxVm42v_j6wU03nq-eMWZbLaHGlQU3iSf9SLd7XxmBcsH_IePsdOyeTClT9WnuQPbqj3Qi_46tAiTiFsIt1nUdr-WqWKc7_bHFYVN2uEGRGA57HNTz6uwu3VjBHHlqVFNkT4B5WmoFJeulAS2QtWaQY6K"/>
+</div>
+<div class="p-3">
+<p class="font-bold text-text-main dark:text-white truncate">Som Tum</p>
+<p class="text-xs text-text-muted dark:text-gray-400">Papaya Salad</p>
+</div>
+</div>
+<!-- History Item 4 (Empty/Placeholder) -->
+<div class="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 dark:border-gray-700 bg-transparent aspect-[4/3] md:aspect-auto">
+<span class="material-symbols-outlined text-gray-300 dark:text-gray-600 text-4xl mb-2">history</span>
+<p class="text-xs text-gray-400 dark:text-gray-500 font-medium">Keep spinning!</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to toggle dark mode for demonstration
+        // In a real app, this would be handled by system preference or a toggle switch
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+        }
+    </script>
+</body></html>

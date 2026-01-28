@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KinRaiDee - Smart Fridge</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#22b477",
+                        "primary-dark": "#1a8f5e",
+                        "background-light": "#f7f8f8",
+                        "background-dark": "#21242c",
+                        "text-main": "#121715",
+                        "text-muted": "#658678",
+                        "accent-yellow": "#ffc107",
+                        "accent-red": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px rgba(0,0,0,0.05)',
+                        'lift': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for sidebar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #e2e8f0;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main min-h-screen flex flex-col overflow-x-hidden selection:bg-primary/30">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 dark:bg-background-dark/80 px-6 py-4">
+<div class="max-w-[1400px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3 group" href="#">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">skillet</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-text-main dark:text-white">KinRaiDee</h1>
+<p class="text-[10px] font-semibold text-primary uppercase tracking-wider">Smart Kitchen</p>
+</div>
+</a>
+<nav class="hidden md:flex items-center gap-1 p-1 bg-gray-100/50 dark:bg-gray-800/50 rounded-full">
+<a class="px-5 py-2 text-sm font-medium text-text-muted hover:text-primary transition-colors rounded-full" href="./index.html">Home</a>
+<a class="px-5 py-2 text-sm font-bold text-text-main bg-white dark:bg-gray-700 shadow-sm rounded-full" href="./myfridge.html">Fridge</a>
+<a class="px-5 py-2 text-sm font-medium text-text-muted hover:text-primary transition-colors rounded-full" href="./tumRaidee.html">Recipes</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted material-symbols-outlined text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2.5 bg-gray-100 dark:bg-gray-800 border-none rounded-xl text-sm w-64 focus:ring-2 focus:ring-primary/50 text-text-main dark:text-white placeholder:text-text-muted/70 transition-all" placeholder="Search recipes..." type="text"/>
+</div>
+<button class="size-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-text-main dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+<div class="size-10 rounded-full bg-gray-200 overflow-hidden border-2 border-white dark:border-gray-700 shadow-sm">
+<div class="w-full h-full bg-cover bg-center" data-alt="User profile avatar showing a smiling person" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBs69C3FL9C3GzaIivxMGsj9DgceFV6_Kxg3vEJpN1cCl2qArGDagcnd_TasL7ZwIrjrj83jh-RPtEKofYo-TrdHZHnfGT40L92rMhp3sNs2A_izFNLUlXiwSFiehQBQw_DwItCLthHZDeIgAEv-A3Ckr8v07Vm62OPgf3K-In1U3FRS6f2-eq3ZjgbCMqEwc3wqPW865XsH5LYviYp46gaMMk2uAAKX_DR9VLzXZbNi3vIXulrnhfKuYwWyA79YI5E_1iFHCqnh4Ew');"></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Wrapper -->
+<div class="flex-1 max-w-[1400px] w-full mx-auto p-6 md:p-8 lg:p-10">
+<!-- VARIANT 2: POPULATED STATE (Main View) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+<!-- Sidebar: My Fridge (Left Column) -->
+<aside class="lg:col-span-3 lg:block flex flex-col gap-6 order-2 lg:order-1">
+<div class="sticky top-28 space-y-6">
+<!-- Fridge Card -->
+<div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-soft border border-gray-100 dark:border-gray-700">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-lg text-text-main dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">kitchen</span>
+                                My Fridge
+                            </h3>
+<button class="size-8 flex items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined text-lg">add</span>
+</button>
+</div>
+<div class="space-y-4">
+<!-- Category: Proteins -->
+<div>
+<p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 pl-2">Proteins</p>
+<ul class="space-y-2">
+<li class="flex items-center justify-between group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-green-500"></div>
+<span class="text-sm font-medium text-text-main dark:text-gray-200">Minced Pork</span>
+</div>
+<span class="text-xs text-text-muted">300g</span>
+</li>
+<li class="flex items-center justify-between group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-green-500"></div>
+<span class="text-sm font-medium text-text-main dark:text-gray-200">Eggs</span>
+</div>
+<span class="text-xs text-text-muted">4 pcs</span>
+</li>
+</ul>
+</div>
+<!-- Category: Veggies -->
+<div>
+<p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 pl-2 mt-4">Vegetables</p>
+<ul class="space-y-2">
+<li class="flex items-center justify-between group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-yellow-500"></div>
+<span class="text-sm font-medium text-text-main dark:text-gray-200">Holy Basil</span>
+</div>
+<span class="text-xs text-text-muted">Low</span>
+</li>
+<li class="flex items-center justify-between group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-green-500"></div>
+<span class="text-sm font-medium text-text-main dark:text-gray-200">Chili</span>
+</div>
+<span class="text-xs text-text-muted">Pack</span>
+</li>
+<li class="flex items-center justify-between group p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-2 rounded-full bg-red-400"></div>
+<span class="text-sm font-medium text-text-main dark:text-gray-200 line-through opacity-50">Lime</span>
+</div>
+<button class="text-[10px] font-bold text-primary bg-primary/10 px-2 py-1 rounded">RESTOCK</button>
+</li>
+</ul>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+<a class="text-sm text-primary font-bold flex items-center justify-center gap-2 hover:underline" href="#">
+                                View Full Inventory
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Quick Stat -->
+<div class="bg-primary text-white rounded-2xl p-6 shadow-lg shadow-primary/20 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 text-white/10 rotate-12">
+<span class="material-symbols-outlined text-[100px]">eco</span>
+</div>
+<p class="text-sm font-medium text-white/80 mb-1">Food Waste Saved</p>
+<p class="text-3xl font-bold">1.2 kg</p>
+<p class="text-xs mt-2 text-white/70">This month</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area (Center/Right) -->
+<main class="lg:col-span-9 flex flex-col gap-8 order-1 lg:order-2">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-2">
+<h2 class="text-4xl md:text-5xl font-black text-text-main dark:text-white tracking-tight">What to Cook?</h2>
+<p class="text-lg text-text-muted font-medium flex items-center gap-2">
+<span class="flex size-2 rounded-full bg-green-500 animate-pulse"></span>
+                            Generating ideas from <strong class="text-primary">12 items</strong> in your fridge
+                        </p>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-2">
+<button class="h-10 px-4 rounded-xl bg-primary text-white text-sm font-bold shadow-md shadow-primary/20 flex items-center gap-2 transition-transform hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                            Ready to Cook
+                        </button>
+<button class="h-10 px-4 rounded-xl bg-white dark:bg-gray-800 text-text-main dark:text-gray-200 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 text-sm font-medium shadow-sm flex items-center gap-2 transition-all hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+                            Quick Meals
+                        </button>
+<button class="h-10 px-4 rounded-xl bg-white dark:bg-gray-800 text-text-main dark:text-gray-200 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 text-sm font-medium shadow-sm flex items-center gap-2 transition-all hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+                            Thai Food
+                        </button>
+<button class="h-10 px-4 rounded-xl bg-white dark:bg-gray-800 text-text-main dark:text-gray-200 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 text-sm font-medium shadow-sm flex items-center gap-2 transition-all hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-[18px]">spa</span>
+                            &lt; 300kcal
+                        </button>
+</div>
+</div>
+<!-- Section 1: Perfect Match (Bento Grid) -->
+<section>
+<div class="flex items-center justify-between mb-5">
+<h3 class="text-xl font-bold text-text-main dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary fill-current">star</span>
+                            Perfect Match (100%)
+                        </h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Hero Card (Pad Kra Pao) -->
+<article class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-lift transition-all duration-300 md:col-span-2 lg:col-span-1 flex flex-col sm:flex-row h-auto sm:h-72">
+<div class="w-full sm:w-2/5 h-48 sm:h-full relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Plate of Pad Kra Pao with fried egg and basil" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBw__dKF6elPd8_qceppOcL7Clm6GFKx9iRb8JSdS4uQhy-pe5oVGHeIarz60cLLDfsG-dVJgOesDvyP9M_rkoSA8tlbkZ174X2s8mG7nfoBc6chkb5cnJVeGq2w-DTb1DeZFS6PzWgCAZ8EOwz9zdNSSiJ3V7iGOhUKzy4Nb24OvL_XCsYrjUroHUL1Kgkrbg4vFsDMfu14YLwhEX3TKN223IDawsUncDNOvNkVSLDKb48IV4NWG3OTOiaKUiMxBNniWsXy5Xizuv');"></div>
+<div class="absolute top-3 left-3 bg-white/90 dark:bg-black/80 backdrop-blur text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-orange-500">local_fire_department</span>
+                                    Spicy
+                                </div>
+</div>
+<div class="flex-1 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-2xl font-bold text-text-main dark:text-white group-hover:text-primary transition-colors">Pad Kra Pao</h4>
+<div class="flex items-center gap-1 text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[14px]">check</span>
+                                            You have all items
+                                        </div>
+</div>
+<p class="text-text-muted text-sm mb-4 line-clamp-2">A Thai classic. Stir-fried minced pork with holy basil and chili, topped with a crispy fried egg.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-xs font-medium text-text-muted dark:text-gray-300">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 15 mins
+                                        </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-xs font-medium text-text-muted dark:text-gray-300">
+<span class="material-symbols-outlined text-[14px]">bar_chart</span> Easy
+                                        </span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<!-- Ingredient Avatars -->
+<div class="size-8 rounded-full border-2 border-white dark:border-gray-800 bg-gray-200 bg-cover" data-alt="Raw pork icon" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCeQtrE-4nUv8lQLp48AhRr_2C-7kYjyP_4eNoTyDKDIBwezoqc8G7FTZ3ZkW6mRKd9ehosvW8Z47hpRQwCyw1JxT-60LSaeQIXT2bIq1LzczTgnRthh0y0IwaYwpEZq9MdobLUFSvDXsPgU7XFN2QDGucqes5A3C-PXf-rICu3iJ8kHoC9mH61uWrOfA8uuYQWfv1uU9QvN0CG0wqV6QZtGwcjg0Ik1FAY7SG4eoLinyGA_9dQ5Q-jPQXr4LVHbaxY0i8RT5ibdKIS');" title="Pork"></div>
+<div class="size-8 rounded-full border-2 border-white dark:border-gray-800 bg-gray-200 bg-cover" data-alt="Basil leaves" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBa3CBfPHXEHCRywE6GnFSHlMemBl-iNEojlHLLsIS0weGz9qUvM7DQj12EerwRq0nLQKCIXDMTgKe1MGGN1sekmv-4Fnjq1SH2hArdaGfnHNCB5U0tkKlD_Ltd24uP_uVtEpaWH5I165shH6TlyN8wXkYFgDLWTkl_BfFfKbBVuDWpa9Cw9hrZXMqX9OegED8n6KFZX8LHeQWinQKkjf_CGO-2e0mC-Uw7v1qaYlaEKy5KeE2oT6fbU3PmZf9V5rk8F58N57mSHqHX');" title="Basil"></div>
+<div class="size-8 rounded-full border-2 border-white dark:border-gray-800 bg-gray-200 bg-cover" data-alt="Red chili pepper" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD3Gsux68tMPE2aX8umbbK5_3EUD0zUXM9dY699smWSSSUeH5E3hY_IxF25XlOgRMQkfcbVUFG_sYIfa_IOkf-9mlFnOJexe9Xil7XCBFoNFpm_AmdlygIjLo4_X6kXKeuevc42xSrzEnujo5S30-X8yeUBwbk1oYM1MGpCyfrj5w1FG83LUHN7S0T86m0u9LlpvfpMDAE-xDnlAa2LRqW7Kby9ZEBwzUsCWdHJqXG1oS59Rmg5lw8XSa6rmCHWkmNmpMdAbwoyaBRr');" title="Chili"></div>
+</div>
+<button class="bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all active:scale-95 flex items-center gap-2">
+                                        Cook Now
+                                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Secondary Card (Omelette) -->
+<article class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-lift transition-all duration-300 flex flex-col">
+<div class="h-48 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Thai style omelette on rice" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWx1XExsAhImwAp2622fiLrmkCvC9kjzbXiEn7VZDovhwb8AZoXFyZQfPEuqq4Aqix7Nf_q4DNgDpwYEXPjUmNg0XEz8Gw25x-vvgo5jNoJZpolKmoPOmVcizpDB30s6YtLMPaZ0E0UeOTK8K1rPvNAn_VGhDMSTUCQnPTW3zau10gDCjd4gsE71aDq0WbZbuACl6ZEdQSRbvcjkZt-fPJ-pHIsu6ore2_PRsmK5pP_S2rb2Hdl28_i6g6PSg1chwRziCXCfitOCnM');"></div>
+<div class="absolute top-3 right-3">
+<button class="size-8 rounded-full bg-white/30 backdrop-blur hover:bg-white text-white hover:text-red-500 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="mb-3">
+<h4 class="text-xl font-bold text-text-main dark:text-white mb-1">Thai Omelette (Khai Jiao)</h4>
+<p class="text-xs text-text-muted">Simple comfort food.</p>
+</div>
+<div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between">
+<div class="flex items-center gap-2 text-xs font-semibold text-text-muted">
+<span class="material-symbols-outlined text-[16px] text-green-500">check_circle</span>
+                                        2/2 Ingredients
+                                    </div>
+<button class="text-primary font-bold text-sm hover:underline">View Recipe</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Section 2: Shopping Needed -->
+<section>
+<div class="flex items-center justify-between mb-5">
+<h3 class="text-xl font-bold text-text-main dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-400">shopping_basket</span>
+                            Almost There (Missing 1-2 items)
+                        </h3>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">See all suggestions</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 3: Tom Yum -->
+<article class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-lift transition-all duration-300 flex flex-col border border-transparent hover:border-gray-100 dark:hover:border-gray-700">
+<div class="h-40 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0" data-alt="Bowl of Tom Yum Kung soup" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7fIB7ra7cczmPMQBG5eqeaXRajEcg_m1Ee5Uk9Ip_c7JGPz2wp_Lxi6uDicUmoH4DA0PthY4XdffuNeX0k983wjVsGNhw3QoFQ4LXGz3vnMFEHoGRAWTiR1P5pCru9SHtgz7YB57mRxliaROUw7gSoYoS6JJHnHsQ86oVZ6vevZJrTiDPghpnOepwCjsh4XUeNvFExFVPDJnrXzCeU2ZucNkgM23GSYEVLPrCJbc2lfIscWeglJt7Q5rWASPGeVnnx1ARt7x7oODc');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+<div class="absolute bottom-3 left-3 text-white">
+<h4 class="font-bold text-lg leading-tight">Tom Yum Kung</h4>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex items-center gap-2 mb-3 bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded-lg border border-yellow-100 dark:border-yellow-900/30">
+<span class="material-symbols-outlined text-yellow-600 dark:text-yellow-500 text-[18px]">warning</span>
+<p class="text-xs font-semibold text-yellow-800 dark:text-yellow-200">Missing: <span class="underline decoration-dotted">Galangal</span></p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+<div class="bg-yellow-400 h-full w-[85%] rounded-full"></div>
+</div>
+<span class="text-xs font-bold text-text-muted ml-3">85%</span>
+</div>
+<button class="mt-4 w-full py-2 rounded-lg border border-gray-200 dark:border-gray-600 text-text-main dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    Add to Shopping List
+                                </button>
+</div>
+</article>
+<!-- Card 4: Green Curry -->
+<article class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-lift transition-all duration-300 flex flex-col border border-transparent hover:border-gray-100 dark:hover:border-gray-700">
+<div class="h-40 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0" data-alt="Thai green curry in a bowl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQqVUOqKHGgJ0Cmd5moz5xVQDeNfwY3abN5pQPjDtbMHhD8PRQkAVAQZvlzWfIxxD7pjAV5_IfXpOhHi3OKlZp1I16e6wP3lrsEHNg0MzwBEnHU5SndG1C5W1Tk7tNsVIctl6LCxYorPH_ifE_MiyN3W97BrdsyETidya_eBhwfOyxyVt8Y_y2q6dZufype-lnxrwfqo1EYkWX2veunudZVPDW7aaMwW1ztJwbXm7tTwr9spwkjQVeB-VA9JJ1Ad6NitudTzQoiXoj');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+<div class="absolute bottom-3 left-3 text-white">
+<h4 class="font-bold text-lg leading-tight">Green Curry</h4>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex items-center gap-2 mb-3 bg-yellow-50 dark:bg-yellow-900/20 p-2 rounded-lg border border-yellow-100 dark:border-yellow-900/30">
+<span class="material-symbols-outlined text-yellow-600 dark:text-yellow-500 text-[18px]">warning</span>
+<p class="text-xs font-semibold text-yellow-800 dark:text-yellow-200">Missing: <span class="underline decoration-dotted">Coconut Milk</span></p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+<div class="bg-yellow-400 h-full w-[70%] rounded-full"></div>
+</div>
+<span class="text-xs font-bold text-text-muted ml-3">70%</span>
+</div>
+<button class="mt-4 w-full py-2 rounded-lg border border-gray-200 dark:border-gray-600 text-text-main dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    Add to Shopping List
+                                </button>
+</div>
+</article>
+<!-- Card 5: Fried Rice -->
+<article class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-soft hover:shadow-lift transition-all duration-300 flex flex-col border border-transparent hover:border-gray-100 dark:hover:border-gray-700">
+<div class="h-40 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0" data-alt="Plate of fried rice with shrimp" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAFu9NWNXFXEWtE2gE0c1LRQEhL-__4Ko3V7Q1DSdFqE1ZXq1IyuCkg998iTJ0qdXmv5JxsePtpmtiA8Koj9vXcgrfHZeHZmSOLetIhgPbi9vGkC1QwVhtN-4cPxe3gmbt654yfdMjNhM6gH8v9MtHOuCuhDLdA99wV5m8Qt9fxid0T2BCBFLJ6UOWptiJ0IsoI6WeM7bKUKUDLoJuu1JOt7H8kIyxlAQCkKIHXYh1coTg2uOlji6K3nei243jLjVur4Nbr1QCXikkM');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+<div class="absolute bottom-3 left-3 text-white">
+<h4 class="font-bold text-lg leading-tight">Shrimp Fried Rice</h4>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<div class="flex items-center gap-2 mb-3 bg-red-50 dark:bg-red-900/20 p-2 rounded-lg border border-red-100 dark:border-red-900/30">
+<span class="material-symbols-outlined text-red-500 text-[18px]">error</span>
+<p class="text-xs font-semibold text-red-800 dark:text-red-200">Missing: <span class="underline decoration-dotted">Shrimp</span>, <span class="underline decoration-dotted">Spring Onion</span></p>
+</div>
+<div class="flex items-center justify-between mt-auto">
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+<div class="bg-red-400 h-full w-[40%] rounded-full"></div>
+</div>
+<span class="text-xs font-bold text-text-muted ml-3">40%</span>
+</div>
+<button class="mt-4 w-full py-2 rounded-lg border border-gray-200 dark:border-gray-600 text-text-main dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    Add to Shopping List
+                                </button>
+</div>
+</article>
+</div>
+</section>
+</main>
+</div>
+<!-- VISUAL DIVIDER FOR DEMO PURPOSES -->
+<div class="my-24 relative flex py-5 items-center">
+<div class="flex-grow border-t border-gray-300 dark:border-gray-700 border-dashed"></div>
+<span class="flex-shrink-0 mx-4 text-gray-400 text-sm uppercase tracking-widest font-bold">Variant: Empty State</span>
+<div class="flex-grow border-t border-gray-300 dark:border-gray-700 border-dashed"></div>
+</div>
+<!-- VARIANT 1: EMPTY STATE -->
+<div class="max-w-2xl mx-auto py-12">
+<div class="bg-white dark:bg-gray-800 rounded-[2.5rem] p-8 md:p-16 text-center shadow-xl border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+<!-- Background Decoration -->
+<div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+<div class="absolute -top-10 -right-10 size-40 bg-yellow-100 dark:bg-yellow-900/20 rounded-full blur-3xl opacity-50"></div>
+<div class="absolute -bottom-10 -left-10 size-40 bg-green-100 dark:bg-green-900/20 rounded-full blur-3xl opacity-50"></div>
+<!-- Illustration Placeholder -->
+<div class="relative w-48 h-48 mx-auto mb-8">
+<!-- Abstract Fridge Illustration using pure CSS/HTML shapes and icons -->
+<div class="absolute inset-0 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center">
+<div class="relative">
+<span class="material-symbols-outlined text-8xl text-blue-200 dark:text-blue-800">kitchen</span>
+<!-- Floating '?' icons -->
+<span class="material-symbols-outlined absolute -top-2 -right-4 text-3xl text-primary animate-bounce" style="animation-delay: 0.1s">question_mark</span>
+<span class="material-symbols-outlined absolute top-8 -left-6 text-2xl text-yellow-400 animate-bounce" style="animation-delay: 0.3s">question_mark</span>
+</div>
+</div>
+<!-- Cobweb decoration -->
+<span class="material-symbols-outlined absolute bottom-4 right-4 text-4xl text-gray-300 dark:text-gray-600 opacity-60">pest_control</span>
+</div>
+<h2 class="text-3xl font-black text-text-main dark:text-white mb-4 tracking-tight">Your fridge is looking a bit lonely!</h2>
+<p class="text-text-muted text-lg mb-10 max-w-md mx-auto leading-relaxed">
+                    It seems you haven't added any items yet. Add ingredients to unlock personalized recipe ideas instantly.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto bg-primary hover:bg-primary-dark text-white px-8 py-3.5 rounded-xl text-base font-bold shadow-lg shadow-primary/25 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                        Add Ingredients
+                    </button>
+<button class="w-full sm:w-auto px-8 py-3.5 rounded-xl text-base font-bold text-text-main dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+                        Scan Receipt
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
